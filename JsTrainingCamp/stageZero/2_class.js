@@ -38,39 +38,58 @@
     // console.log(cShape.draw2);
 
     // 用js 模仿 OOP编程
-    function ShapeD(ax, ay) {
-        var x = 0;
-        var y = 0;
+    // function ShapeD(ax, ay) {
+    //     var x = 0;
+    //     var y = 0;
 
-        var init = function () {
-            x = ax;
-            y = ay;
-        }
+    //     var init = function () {
+    //         x = ax;
+    //         y = ay;
+    //     }
 
-        init();
+    //     init();
 
-        this.getX = function () {
-            return x;
-        }
-    }
+    //     this.getX = function () {
+    //         return x;
+    //     }
+    // }
 
-    var dShape = new ShapeD(2, 4);
-    console.log(dShape.getX());
+    // var dShape = new ShapeD(2, 4);
+    // console.log(dShape.getX());
 
     // 模仿OOP 编程的构造函数， 现在来写静态属性和静态方法
     // JS中静态方法是作用到类身上的 而非是对象
-    function Person() {
-        this.name = "gaga";
-    }
-    // 静态变量
-    Person.age = 0;
-    Person.showName = function () {
-        console.log(this.name);
+    // function Person() {
+    //     this.name = "gaga";
+    // }
+    // // 静态属性方法中可直接使用函数名当作对象名
+    // // 静态属性
+    // Person.age = 0;
+    // // 静态方法
+    // Person.showName = function (obj) {
+    //     console.log(obj.name);
+    // }
+    
+    // Person.showName(new Person())
+
+    // 定义一个man 构造器
+    function man() {
+        man.s ++;
     }
 
-    var p = new Person();
+    // 添加一个静态属性
+    man.s = 0;
 
-    console.log(p.showName())
+    // 添加一个静态方法
+    man.f = function () {
+        console.log(man.s);
+    }
+
+    var m1 = new man();
+    var m2 = new man();
+
+    man.f();
+
 
 
 })();
