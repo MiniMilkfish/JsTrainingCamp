@@ -141,12 +141,12 @@
 
     // 静态类
     // 对于静态属性和静态方法，我们可以使用字面量的方式来创建
-    var user = {
-        init: function (name, age) {
-            this.name = name;
-            this.age = age;
-        }
-    }
+    // var user = {
+    //     init: function (name, age) {
+    //         this.name = name;
+    //         this.age = age;
+    //     }
+    // }
 
 
 
