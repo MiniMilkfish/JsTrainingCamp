@@ -1,4 +1,123 @@
 (function () {
+    /**
+     * 原型链
+     * 
+     * 1、理解
+     *  每个对象都可以有一个原型 __proto__, 这个原型还可以有他自己的原型, 以此类推形成一个原型链；
+     *  查找特定属性的时候，我们先去这个对象里去找，如果没有的话就去他的原型对象里面去，如果还没有的话再去原型对象的原型对象里去找……这个操作被委托在整个原型链上；
+     *  
+     * 
+     * 2、原型指针
+     *  prototype
+     *      函数所独有的， 它是从一个函数指向一个对象。
+     *      它的含义是函数的原型对象，也就是这个函数（其实所有函数都可以作为构造函数）所创建的实例的原型对象；
+     *      这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）
+     * 
+     *  __proto__
+     *      对象所独有的，是指向构造函数的原型对象；
+     *      原型链查询中实际用到的，它总是指向 prototype， 换句话就是指向构造函数的原型对象；
+     * 
+     * 3、构造器指针
+     *  construtor
+     * 
+     *  __constructor__
+     * 
+     */
+
+    // function Foo(y) {
+    //     this.y = y;
+
+    //     var x = 10;
+    //     var calculate = function () { }
+    // }
+
+    // var b = new Foo(20);
+    // console.log(b.y);
+
+    // var c = new Foo(30);
+    // console.log(c.y);
+
+    // console.log(b.__proto__, c.__proto__);          // Foo {}
+    // console.log(b.prototype, c.prototype);          // undefined, b、c 是实例对象，不是函数
+    // console.log(b.constructor, c.constructor);      // [Function: Foo]
+
+    // console.log(Foo.prototype);                     // Foo {}
+    // console.log(Foo.prototype.constructor);         // [Function: Foo]
+    // console.log(Foo.constructor);                   // [Function: Function]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * instanceof 运算符 用于监测构造函数的 prototype 属性是否出现在某个实例对象的原型链上
+     * 
+     * 语法：
+     *  Object(某个实例对象) instanceof constructor（某个构造函数）
+     * 描述：
+     *  instanceof 运算符用来监测 constructor.prototype 
+     */
+
+    // demo1
+    // function Car(make, model, year) {
+    //     this.make = make;
+    //     this.model = model;
+    //     this.year = year;
+    // }
+    // const auto = new Car("Honda", "Accord", 1998);
+    // console.log(auto instanceof Car);
+    // console.log(auto instanceof Object);
+
+    // demo2
+    // function C() { }
+    // function D() { }
+
+    // var o = new C();
+
+    // console.log(o instanceof C);    // true Object.getPrototypeOf(o) === C.prototype
+
+    // console.log(Object.getPrototypeOf(o));
+    // console.log(C.prototype);
+    // console.log(Object.getPrototypeOf(o) === C.prototype);
+
+    // console.log(o instanceof D);    // false D.prototype 不在 o 的原型链上
+
+    // console.log(o instanceof Object);   // true
+    // console.log(Object.prototype.isPrototypeOf(o))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // js 中利用function 来定义类
 
     // function Shape(){
@@ -141,19 +260,12 @@
 
     // 静态类
     // 对于静态属性和静态方法，我们可以使用字面量的方式来创建
-    var user = {
-        init: function (name, age) {
-            this.name = name;
-            this.age = age;
-        }
-    }
-
-
-
-
-
-
-
+    // var user = {
+    //     init: function (name, age) {
+    //         this.name = name;
+    //         this.age = age;
+    //     }
+    // }
 
 
 
