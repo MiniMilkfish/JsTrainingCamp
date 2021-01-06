@@ -20,8 +20,9 @@
      * 3、构造器指针
      *  construtor
      * 
-     *  __constructor__
-     * 
+     * 总结： 
+     *  实例对象的 __proto__ 指向构造函数的原型  prototype
+     *  构造函数原型对象下面的  constructor 指向创建自己的构造函数
      */
 
     // function Foo(y) {
@@ -44,16 +45,6 @@
     // console.log(Foo.prototype);                     // Foo {}
     // console.log(Foo.prototype.constructor);         // [Function: Foo]
     // console.log(Foo.constructor);                   // [Function: Function]
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -98,21 +89,64 @@
 
 
 
+    /**
+     * 构造函数
+     * 
+     * 构造函数其实就是一个普通函数，只是为了区分普通函数，通常建议构造函数的 name 首字母大写
+     * ES5 构造函数没有区别于普通函数
+     * ES6 class (类) 仅支持new 调用，普通调用会报错： Class constructor [Function_name] cannot be invoked without "new"
+     */
+    // //ES5
+    // function Parent() { console.log("我想变秃头")}   // 这是一个构造函数
 
+    // // 这也是一个构造函数
+    // function parent() {
+    //     this.name = "不秃头";
+    // }
+    // let child = new parent();
+    // console.log(child.name);    // parent {name: "不秃头"}
 
+    // Parent();       // 构造函数也能普通调用
 
+    // class P {
+    //     sayName(){
+    //         console.log("秃驴")
+    //     }
+    // }
 
+    // // ES6
+    // var c = new P();
+    // c.sayName();    // 秃驴
+    // // P(); //TypeError: Class constructor P cannot be invoked without 'new'
 
+    // // es5 demo1
+    // function CupCustom(diameter, height){
+    //     this.diameter = diameter;
+    //     this.height = height;
+    // }
 
+    // CupCustom.prototype.color = "blue";
+    // var cup1 = new CupCustom(8, 15);
+    // var cup2 = new CupCustom(5, 10);
 
+    // console.log(cup1.height, cup2.height, cup2.color);
+    // console.dir(CupCustom);
 
+    // // es6 demo
+    // class CupCustom{
+    //     constructor(diameter, height){
+    //         this.diameter = diameter;
+    //         this.height = height;
+    //     }
+    // }
 
+    // CupCustom.prototype.color = 'red';
 
+    // var cup1 = new CupCustom(10, 15);
+    // var cup2 = new CupCustom(5, 12);
 
-
-
-
-
+    // console.log(cup1.height, cup2.height, cup2.color);
+    // console.dir(CupCustom);
 
 
 
@@ -197,6 +231,9 @@
     // Person.showName(new Person())
 
 
+
+
+
     // // 公有属性和公有方法
     // function User(name, age) {
     //     this.name = name;
@@ -214,6 +251,9 @@
     // var user = new User("gaga", 23);
     // console.log(user.getName());
     // console.log(user.getAge());
+
+
+
 
 
     // // 私有属性和私有方法
@@ -243,6 +283,9 @@
     // console.log(User.myName);
 
 
+
+
+
     // // 特权方法
     // function User(name, age) {
     //     var name = name;
@@ -258,6 +301,8 @@
 
 
 
+
+
     // 静态类
     // 对于静态属性和静态方法，我们可以使用字面量的方式来创建
     // var user = {
@@ -266,6 +311,7 @@
     //         this.age = age;
     //     }
     // }
+
 
 
 
@@ -288,6 +334,9 @@
     // var m2 = new man();
 
     // man.f();
+
+
+
 
 
 
@@ -315,6 +364,9 @@
 
     // console.log(Person.info + '-----'); // 静态属性调用方法
     // Person.show();                      // 静态方法调用方式
+
+
+
 
 
     // -----------------------------------------------------------------------------------------
