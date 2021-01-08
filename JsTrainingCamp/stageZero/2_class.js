@@ -1,5 +1,20 @@
 (function () {
     /**
+     * 解答以下问题：
+     *  1 什么是原型和原型链，原型链的顶端是什么？
+     *  2 原型链和作用域链有何区别？
+     *  3 构造函数与普通函数的区别？
+     *  4 能否判断当前函数是普通调用或new 构造调用？
+     *  5 prototype 与 __proto__ 是什么？
+     *  6 怎么判断对象是否包含某条属性？
+     *  7 怎么判断某条属性是否为对象自身属性而非原型属性？
+     *  8 constructor 与 instanceof 有何区别？
+     *  9 能不能手动实现 new 方法？
+     *  10 能够创建严格意义上的空对象？
+     *  ……
+     */
+
+    /**
      * 原型链
      * 
      * 1、理解
@@ -92,9 +107,11 @@
     /**
      * 构造函数
      * 
-     * 构造函数其实就是一个普通函数，只是为了区分普通函数，通常建议构造函数的 name 首字母大写
-     * ES5 构造函数没有区别于普通函数
-     * ES6 class (类) 仅支持new 调用，普通调用会报错： Class constructor [Function_name] cannot be invoked without "new"
+     * 与Java 基于类不同， Javascript 是一门基于原型 prototype 的脚本语言，至少在ES6 之前 Javascript 并无类的概念，但却有类的模拟实现，也就是我们常说的构造函数；
+     * 构造函数其实就是一个普通函数，只是为了区分普通函数，通常建议构造函数的 name 首字母大写；
+     * 
+     * ES5 构造函数没有区别于普通函数；
+     * ES6 class (类) 仅支持new 调用，普通调用会报错： Class constructor [Function_name] cannot be invoked without "new"；
      */
     // //ES5
     // function Parent() { console.log("我想变秃头")}   // 这是一个构造函数
@@ -456,6 +473,8 @@
     // }
 
     // new person().showName();
+
+    
 
 
 
