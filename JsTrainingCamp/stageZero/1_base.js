@@ -13,7 +13,7 @@
     /**
      * 2、数据类型和类型转换
      *  1) 基本数据类型 Number String Boolean Undefined Null Symbol
-     *  2) 引用数据类型（复合类型） Object Function Date Array RegExp
+     *  2) 引用数据类型（复合类型） Object Function Date Array RegExp等
      */
 
     //  数字

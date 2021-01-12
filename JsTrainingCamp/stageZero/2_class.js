@@ -1,6 +1,6 @@
 (function () {
     /**
-     * 解答以下问题：
+     * 解答以下问题：（答案在末尾）
      *  1 什么是原型和原型链，原型链的顶端是什么？
      *  2 原型链和作用域链有何区别？
      *  3 构造函数与普通函数的区别？
@@ -11,7 +11,6 @@
      *  8 constructor 与 instanceof 有何区别？
      *  9 能不能手动实现 new 方法？
      *  10 能够创建严格意义上的空对象？
-     *  ……
      */
 
     /**
@@ -112,6 +111,8 @@
      * 
      * ES5 构造函数没有区别于普通函数；
      * ES6 class (类) 仅支持new 调用，普通调用会报错： Class constructor [Function_name] cannot be invoked without "new"；
+     * 
+     * 每一个函数都属于原始构造函数 Function 的实例，而每一个函数又能作为构造函数生产属于自己的实例；
      */
     // //ES5
     // function Parent() { console.log("我想变秃头")}   // 这是一个构造函数
@@ -474,8 +475,188 @@
 
     // new person().showName();
 
-    
 
 
 
+    /**
+     * String Number Boolean 属于包装对象，包装对象是一种声明周期只有一瞬的对象，创建与销毁都由底层实现；
+    */
+    // var foo = "bar";
+    // var foo1 = undefined;
+
+    // // 创建String实例，将实例赋予变量 string
+    // let string = new String("bar");
+    // // 在实例上调用指定的方法
+    // foo1 = string.valueOf();
+    // // 销毁这个实例
+    // string = null;
+
+    // console.log(foo, foo1);
+
+
+
+
+
+    /**
+     *  在不修改构造函数 prototype 前提下，所有实例 __proto__ 属性中的 constructor 属性都指向创建自己的构造函数；
+     */
+    // // 模拟代码，并不能真正执行
+    // // 原始构造函数
+    // function Function() { };
+    // Function.prototype = {
+    //     call: function () { },
+    //     apply: function () { },
+    //     bind: function () { },
+    // };
+
+    // //由原始构造函数得到实例构造函数CupCustom
+    // var CupCustom = new Function();
+    // CupCustom.prototype = {
+    //     color: 'blue'
+    // };
+    // // 由构造函数CupCustom最终得到实例
+    // var cup1 = new CupCustom();
+    /**
+     * 结论
+     *  原始构造函数 Function() 扮演着创世主女娲的角色， 她创造了 Object()、Number()、String()、Date()、function fn(){} 等 第一批人类（也就是构造函数），而人类具备了繁衍的能力（使用new 操作符）
+     *  于是 Number() 繁衍出了数据类型数据， String() 诞生了字符串， function fn(){} 作为构造函数也诞生了各式各样的对象后代
+     */
+    // // 所有函数对象的__proto__都指向Function.prototype，包括Function本身
+    // Number.__proto__ === Function.prototype //true
+    // Number.constructor === Function //true
+
+    // String.__proto__ === Function.prototype //true
+    // String.constructor === Function //true
+
+    // Object.__proto__ === Function.prototype //true
+    // Object.constructor === Function //true
+
+    // Array.__proto__ === Function.prototype //true
+    // Array.constructor === Function //true
+
+    // Function.__proto__ === Function.prototype //true
+    // Function.constructor === Function //true
+    /**
+     * 在不修改构造函数原型的前提下，实例的 __proto__ 与构造函数的 prototype 是对等关系
+     */
+    // function Parent(){}
+    // var son = new Parent();
+    // son.__proto__ === Parent.prototype
+
+
+
+
+    /**
+     * new 一个构造函数，得到的实例继承了构造器的构造属性以及原型上的属性
+     * 
+     * new 一个构造器的原理：
+     *      1、以构造器的prototype 属性为原型， 创建新对象；
+     *      2、将 this 和调用参数传给构造器，执行；
+     *      3、如果构造器没有手动返回对象，则返回第一步创建的新对象，如果有，则舍弃掉第一步创建的新对象，返回手动return 的对象；
+     */
+    // // ES5 构造函数
+    // let Parent = function (name, age){
+    //     // 1 创建一个空对象，赋予 this， 这一步是隐性的
+    //     let _this = {};
+    //     // 2 给 this 指向的对象赋予构造属性
+    //     _this.name = name;
+    //     _this.age = age;
+    //     // 3 如果没有手动返回对象，则默认返回 this 指向的这个对象，也是隐性的
+    //     return _this;
+    // }
+    // const child = new Parent("zhazha", 26);
+    // console.log(child.name)
+
+    // /**
+    //  * 实现一个简单的new 方法
+    //  * */
+    // // 构造器函数
+    // let Parent = function (name, age) {
+    //     this.name = name;
+    //     this.age = age;
+    // };
+    // Parent.prototype.sayName = function () {
+    //     console.log(this.name);
+    // };
+    // // 自定义的new 方法
+    // let newMethod = function (Parent, ...rest) {
+    //     // 1 以构造器的 prototype 属性为原型 创建新对象
+    //     let child = Object.create(Parent.prototype);
+    //     // 2 将this 和调用参数传给构造器执行
+    //     let result = Parent.apply(child, rest);
+    //     // 3 如果构造器没有手动返回对象，则返回第一步的对象
+    //     return typeof result === "object" ? result : child;
+    // }
+
+    // // 创建实例，将构造函数 Parent 与形参作为参数传入
+    // const child = newMethod(Parent, "echo", 26);
+    // child.sayName();
+
+    // // 最后校验，与使用new 效果相同
+    // console.log(child instanceof Parent);
+    // console.log(child.hasOwnProperty('name'))
+    // console.log(child.hasOwnProperty('age'))
+    // console.log(child.hasOwnProperty('sayName'))
+    // console.log(child.__proto__ === newMethod.prototype)
+
+
+
+
+
+    /**
+     * 1 什么是原型和原型链，原型链的顶端是什么？
+     *  Javascript 中万物皆对象，且对象皆可通过 __proto__ 属性访问创建自己构造函数的原型对象，直白点说，原型就是一个包含了诸多属性方法的对象，原型对象的 __proto__ 指向构造函数 Object() 的原型；
+     *  当一个对象访问某个属性时，它会先查找自己有没有，如果没有就顺着 __proto__ 网上查找创建自己构造函数的原型有没有，这个过程就是原型链；
+     *  原型链的顶端是 null;
+     * 
+     *  
+     * 2 原型链和作用域链有何区别？
+     *  在当前作用域查找某个变量时，如果没有就追溯到上层作用域，如果还没有则一只找到全局作用域，这个过程就是作用域链；
+     *  区别就是原型链的顶端是 null，作用域链的顶端是全局对象，原型链没找到某个属性返回 undefined， 而作用域链没找到会直接报错，告诉你未声明；
+     * 
+     * 
+     * 3 构造函数与普通函数的区别？
+     *  没有区别；
+     *  函数都可以被普通调用和new 调用，所以可以说函数就是构造函数，但是从ES6 推出Class类，构造函数才有了一个真的名分；
+     * 
+     * 
+     * 4 能否判断当前函数是普通调用或new 构造调用？
+     *  方法一：
+     *      普通调用，this 绑定属于默认绑定，一定指向全局 window (非严格模式);
+     *      new 调用，指向构造函数内创建的实例；
+     *  方法二：
+     *      new.target 字段判断，如果是new 调用则指向函数本身；
+     * 
+     * 
+     * 5 prototype 与 __proto__ 是什么？
+     *  prototype 是原型对象， __proto__ 是访问器属性;
+     * 
+     * 
+     * 6 怎么判断对象是否包含某条属性？
+     *  使用 in 关键字判断，格式： "属性名 in 对象名"
+     * 
+     * 
+     * 7 怎么判断某条属性是否为对象自身属性而非原型属性？
+     *  使用 hasOwnProperty 方法判断，格式： "对象名.hasOwnProperty(属性名)"
+     * 
+     * 
+     * 8 constructor 与 instanceof 有何区别？
+     *  constructor 是原型对象中的一个属性，调用返回的是创建实例的构造函数，是一个方法，只能寻找到原型链的上一层；
+     *  instanceOf 是一个运算符，返回的是一个布尔值，可以判断是否属于原型链的任意一层；
+     *  在修改过构造函数原型时， instanceOf 比 constructor 更准确；
+     * 
+     * 
+     * 9 能不能手动实现 new 方法？
+     *  能
+     * 
+     * 
+     * 10 能够创建严格意义上的空对象？
+     *  方法1： Object.create(null);
+     *  方法2： Object.setPropertyOf({}, null);
+     */
 })();
+
+/**
+ * 参考：
+ * https://www.cnblogs.com/echolun/p/12321869.html
+ */
