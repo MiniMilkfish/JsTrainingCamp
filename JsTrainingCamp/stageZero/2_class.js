@@ -475,6 +475,70 @@
 
     // new person().showName();
 
+    // var cat = {};
+    // Object.setPrototypeOf(cat, person.prototype);
+    // cat.showName();
+    // Object.getPrototypeOf(cat).age = "123"
+    // console.log(cat.age)
+
+
+    // /**
+    //  * 利用原型实现简单继承
+    //  * JS 无法实现多继承
+    //  */
+    // function per() {
+    //     this.getName = function (str) {
+    //         console.log(str);
+    //     }
+    // }
+
+    // per.prototype.getAge = function (age) {
+    //     console.log(age)
+    // }
+
+    // var a = {}; // 空类
+    // a.__proto__ = per.prototype;
+    // a.getAge(2);
+    // new per().getName(123);
+
+    // // a.__proto__.constructor = per;
+    // // a.getName("123")
+    // // new obj.__proto__.constructor().getName(123)
+
+    // var b = {
+    //     getSex: function (a) { console.log(a) }
+    // };
+    // console.log(b.__proto__.constructor.prototype)
+    // console.log(b.__proto__.prototype);
+
+    // b.__proto__ = new per();
+    // b.__proto__.constructor = b;
+
+    // b.getAge("1")
+    // b.getName("2")
+    // b.getSex('m')
+
+
+
+
+    // /**
+    //  * 串联继承
+    //  */
+    // function m() { this.showM = function () { console.log("im is m") } }
+    // function n() { this.showN = function () { console.log("im is n") } }
+    // function k() { }
+
+    // n.prototype = new m();
+    // n.prototype.constructor = n;
+
+    // k.prototype = new n();
+    // k.prototype.constructor = k;
+
+    // var boo = new k();
+    // boo.showM();
+    // boo.showN();
+
+
 
 
 
@@ -606,13 +670,13 @@
     /**
      * 1 什么是原型和原型链，原型链的顶端是什么？
      *  Javascript 中万物皆对象，且对象皆可通过 __proto__ 属性访问创建自己构造函数的原型对象，直白点说，原型就是一个包含了诸多属性方法的对象，原型对象的 __proto__ 指向构造函数 Object() 的原型；
-     *  当一个对象访问某个属性时，它会先查找自己有没有，如果没有就顺着 __proto__ 网上查找创建自己构造函数的原型有没有，这个过程就是原型链；
+     *  当一个对象访问某个属性时，它会先查找自己有没有，如果没有就顺着 __proto__ 往上查找创建自己构造函数的原型有没有，这个过程就是原型链；
      *  原型链的顶端是 null;
      * 
      *  
      * 2 原型链和作用域链有何区别？
-     *  在当前作用域查找某个变量时，如果没有就追溯到上层作用域，如果还没有则一只找到全局作用域，这个过程就是作用域链；
-     *  区别就是原型链的顶端是 null，作用域链的顶端是全局对象，原型链没找到某个属性返回 undefined， 而作用域链没找到会直接报错，告诉你未声明；
+     *  在当前作用域查找某个变量时，如果没有就追溯到上层作用域，如果还没有则一直找到全局作用域，这个过程就是作用域链；
+     *  区别就是原型链的顶端是 null，作用域链的顶端是全局对象，原型链没找到某个属性返回 undefined， 而作用域链没找到会直接报错，告诉你not defined；
      * 
      * 
      * 3 构造函数与普通函数的区别？
@@ -630,6 +694,7 @@
      * 
      * 5 prototype 与 __proto__ 是什么？
      *  prototype 是原型对象， __proto__ 是访问器属性;
+     *  对象就是通过 __proto__ 访问构造函数的原型对象；
      * 
      * 
      * 6 怎么判断对象是否包含某条属性？
