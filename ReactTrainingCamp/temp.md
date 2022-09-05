@@ -1,0 +1,115 @@
+React 拆分组件的时机
+    - 当单元测试变得很难写，而不得只写集成测试的时候;
+    - 当 State 和 生命周期钩子难以维护的时候;
+    - 当一些代码都开始重复第三遍的时候;
+    - 当整个App 太频繁重渲染的时候;
+
+
+为什么选择React 而非 Vue?
+    - 因为React 更简单？
+    - 因为项目有跨平台的可能性，React 本身是基于浏览器的
+      - 用RN 做Android和IOS App 还蛮流行;
+      - RN for Windows + macOS 来做桌面端;
+      - React + three.js / Pixi.js 能用来做3D或2D WebGL 组件
+      - React Lnk 做命令行工具;
+      - Taro 做微信小程序;
+  
+Recat Vue 选择？
+    - 新手 - 轻量级的前端开发技术
+      - Vue 
+      - 上手快又容易，当你项目变大，他又是一个完整的框架
+    - 老手
+      - Recat
+      - 声明式、函数式、适合JS大佬
+
+
+2022年Web前端发展趋势
+    - 开发范式 & 底层框架
+      - React Hooks
+        - 彻底取代了 Class Components
+        - 启发了组件逻辑表达和逻辑服用的新范式
+        - 开发体验问题
+          - Hooks 执行原理合原生JS 心智模型的差异
+          - 不能条件是调用
+          - Stale Closure（过期闭包）的心智负担
+          - 必须手动声明 useEffect 依赖
+          - 如何“正确” 使用 useEffect 是个复杂的问题
+          - 需要 useMemo / useClllback 等手动优化
+        - 改善体验问题所作的努力
+          - useEvent RFC  改善 userCallback 的问题
+          - Dan Abramov 花大量时间改进新版文档（尤其useEffect 部分）
+          - 黄玄正在开发中的 React Forget（编译时优化工具） 意在避免需要手动声明依赖
+      - 依赖追踪范式 - 共同点
+        - 一次调用，符合原生JS 直觉
+        - 自动追踪依赖，无需手动声明
+        - 引用稳定，无需useCallback
+      - 基于编译时的响应系统 
+    - 工具链
+      - webpack
+      - 原生语言在前端工具链中的使用
+        - esbuild - Ge
+        - SWC - Rust
+        - Bun - Zig
+        - Parcel2 - JS/ Rust hybrid
+        - Vite - JS/ Go hybrid via esbuild
+        - napi-rs - Rust
+      - 原生语言在前端工具链中的使用原则
+        - 原生语言更适用于用例专注且标准相对稳定的情况，否则很难榨取最大化的性能优势
+        - 原生语言会影响可扩展性，增加社区参与门槛，影响生态发展
+        - JS/原生混合工具链将会成为常态
+      - 工具链的抽象层次
+        - 专注于打包抽象层次低
+          - browserify
+          - webpack
+          - rollup
+        - 专注于应用抽象层次高
+          - Parcel
+          - Vue-Cli
+          - CRA
+        - CLI专注于应用，抽象层次高； API专注于支持上层框架，抽象层次中
+          - Vite
+    - 上层框架 Meta Frameworks
+      - 基于Vite 的上层框架
+        - Nuxt 3
+        - SvelteKit
+        - Shopify Hydrogen  - Rreact 18
+        - Astro
+        - Qwik
+        - FastifyDX
+        - Solid Start
+        - Laravel 新默认前端方案
+      - JS 全栈的意义
+        - 一个语言，前后 “打通”
+      - JS 全栈的代价
+        - 虽然数据已经渲染出了 HTML，但还是需要额外发送一份数据用于 Hydrate
+        - 即使在客户端没有交互的组件依然会被打包发送至客户端
+        - Hydrate 影响页面交互指标（TTI）
+      - 数据的前后端打通
+        - Next
+          - getStaticProps
+          - getServerSideProps
+        - Nuxt
+          - API routes +
+          - useFetch +
+          - Top Level await
+        - Remix
+          - loader / action
+          - +Enhanced
+          - HTML Form
+      - 类型的前后端打通
+        - 通过显式引入共享类型
+        - 自动基于DB schema 生成类型
+        - Nuxt 3：自动基于文件布局生成 API/ 路由类型
+      - 社区探索方向
+        - Server-only Components
+          - Hydrogen
+          - Next
+          - Nuxt
+        - Partial hydration/ Island Architecture
+          - Astro
+          - Isles
+          - Fresh
+        - Fine-grained + rsumable hydration
+          - Qwik
+        - Shell + partial hydration
+          - VitePress
