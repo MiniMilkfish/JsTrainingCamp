@@ -13,6 +13,8 @@
 
 /**
  * 4.3 应用JavaScript 函数
+ * 
+ * 事件处理函数 event handler
  */
 
 /**

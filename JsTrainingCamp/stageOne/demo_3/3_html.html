@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Shopping list</title>
+    <title>第三章 DOM | Javascript DOM 编程艺术 第二版</title>
     <style type="text/css">
         body {
             color: white;
@@ -14,7 +14,7 @@
             border: 1px solid white;
             background-color: #333;
             color: #ccc;
-            padding: 1em;
+            padding: 2em;
         }
 
         #purchases li {
@@ -31,9 +31,55 @@
         <li class="sale">Cheese</li>
         <li class="sale important">Milk</li>
     </ul>
+    <p>This is just a test</p>
 
     <script>
-        alert(typeof document.getElementById("purchases"));
+        // console.log(document.getElementById("purchases"));
+
+        // let domLi = document.getElementsByTagName('li');
+        // console.log(domLi.length)
+
+        // for (let index = 0; index < domLi.length; index++) {
+        //     const element = domLi[index];
+        //     console.log(typeof element)
+        // }
+
+        // console.log(document.getElementsByTagName('*').length)
+
+        // let shopping = document.getElementById("purchases");
+        // var sales = shopping.getElementsByClassName("sale");
+        // console.log(1, sales, sales.length)
+
+        // /**
+        //  * 内建对象 getElementsByClassName
+        //  * @param {Object} - DOM树中的搜索起点
+        //  * @param {String} className - 要搜索的类名
+        // */
+        // function _getElementsByClassName(node, className) {
+        //     if (node.getElementsByClassName) {
+        //         return node.getElementsByClassName(className);
+        //     } else {
+        //         var results = new Array();
+        //         var elems = node.getElementsByTagName("*");
+        //         for (let i = 0; i < elems.length; i++) {
+        //             const element = elems[i];
+        //             if (element.className.indexOf(className) != -1) {
+        //                 results[results.length] = elems[i];
+        //             }
+        //         }
+        //         return results;
+        //     }
+        // }
+
+        // var _sales = _getElementsByClassName(shopping, "sale");
+        // console.log(2, _sales, _sales.length);
+
+        var paras = document.getElementsByTagName('p');
+        for (let i = 0; i < paras.length; i++) {
+            const element = paras[i];
+            var title = element.getAttribute('title');
+            if (title) console.log(element.getAttribute('title'))
+        }
     </script>
 </body>
 
